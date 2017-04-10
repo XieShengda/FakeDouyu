@@ -4,27 +4,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.sender.fakedouyu.R;
-import com.sender.fakedouyu.fragment.ChannelFragment.OnListFragmentInteractionListener;
+import com.sender.fakedouyu.bean.SubChannelInfo;
 import com.sender.fakedouyu.fragment.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyChannelRecyclerViewAdapter extends RecyclerView.Adapter<MyChannelRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final List<SubChannelInfo> mValues;
 
-    public MyChannelRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyChannelRecyclerViewAdapter(List<SubChannelInfo> items) {
         mValues = items;
-        mListener = listener;
     }
 
     @Override
@@ -36,18 +35,14 @@ public class MyChannelRecyclerViewAdapter extends RecyclerView.Adapter<MyChannel
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        SubChannelInfo subChannelInfo = mValues.get(position);
+        Glide.with(holder.mView.getContext()).load(subChannelInfo.getIconUrl()).into(holder.mIcon);
+        holder.mTagName.setText(subChannelInfo.getTagName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
+                // TODO: 2017/4/10 跳转到channelActivity
             }
         });
     }
@@ -59,20 +54,19 @@ public class MyChannelRecyclerViewAdapter extends RecyclerView.Adapter<MyChannel
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final ImageView mIcon;
+        public final TextView mTagName;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mIcon = (ImageView) view.findViewById(R.id.channel_icon);
+            mTagName = (TextView) view.findViewById(R.id.tag_name);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mTagName.getText() + "'";
         }
     }
 }

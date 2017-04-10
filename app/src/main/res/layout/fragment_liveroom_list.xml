@@ -5,9 +5,7 @@
     android:name="com.sender.fakedouyu.fragment.LiveRoomFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:paddingLeft="28dp"
-    android:paddingRight="28dp"
+    android:paddingRight="32dp"
+    android:paddingLeft="32dp"
     tools:context="com.sender.fakedouyu.fragment.LiveRoomFragment"
     tools:listitem="@layout/fragment_liveroom" />

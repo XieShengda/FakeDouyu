@@ -11,8 +11,8 @@ import java.util.List;
  */
 
 public class MyViewPagerAdapter extends FragmentPagerAdapter {
-    private  List<String> mTitles;
-    private  List<Fragment> mFragments;
+    private final List<String> mTitles;
+    private final List<Fragment> mFragments;
 
     public MyViewPagerAdapter(FragmentManager fm, List<Fragment> fragments, List<String> titles) {
         super(fm);

@@ -20,7 +20,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends BaseActivity implements ChannelFragment.OnListFragmentInteractionListener, FavoriteFragment.OnListFragmentInteractionListener{
+public class MainActivity extends BaseActivity implements FavoriteFragment.OnListFragmentInteractionListener{
 
     private final static String TAG  = "MainActivity";
     private Toolbar toolbar;

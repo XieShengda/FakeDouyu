@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView topRecyclerView;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private List<Fragment> fragments;
+    private  List<Fragment> fragments;
     private List<String> titles;
     public HomeFragment() {
         // Required empty public constructor

@@ -11,14 +11,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.sender.fakedouyu.R;
 import com.sender.fakedouyu.bean.RoomInfo;
-import com.sender.fakedouyu.fragment.ChannelFragment.OnListFragmentInteractionListener;
 import com.sender.fakedouyu.fragment.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {

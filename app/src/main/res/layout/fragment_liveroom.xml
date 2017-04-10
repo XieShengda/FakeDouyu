@@ -4,7 +4,7 @@
     android:layout_width="144dp"
     android:layout_height="wrap_content"
     app:cardElevation="3dp"
-    app:cardBackgroundColor="@color/colorPrimaryDark">
+    app:cardBackgroundColor="@color/colorIcons">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="81dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/temp" />
+            android:background="@drawable/temp" />
 
 
 
@@ -26,7 +26,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="房间名字"
-                android:background="@color/colorIcons"
                 android:textColor="@color/colorPrimary_text"
                 android:textSize="@dimen/text_size_normal" />
 
@@ -36,7 +35,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="nickname"
-                android:background="@color/colorIcons"
 
                 android:textColor="@color/colorSecondary_text"
                 android:textSize="@dimen/text_size_tiny" />
@@ -47,7 +45,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="房间人数：9999"
-                android:background="@color/colorIcons"
 
                 android:textColor="@color/colorSecondary_text"
                 android:textSize="@dimen/text_size_tiny" />
