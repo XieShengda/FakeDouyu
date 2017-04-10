@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.sender.fakedouyu.R;
@@ -22,8 +23,10 @@ import java.util.Map;
 
 public class MainActivity extends BaseActivity implements ChannelFragment.OnListFragmentInteractionListener, LiveRoomFragment.OnListFragmentInteractionListener, FavoriteFragment.OnListFragmentInteractionListener{
 
+    private final static String TAG  = "MainActivity";
     private Toolbar toolbar;
-    private final static Map<String, Boolean> IS_EXIST = new Hashtable<>();//Fragment是否add过
+//    private CollapsingToolbarLayout toolbar;
+    private Map<String, Boolean> isExist;//Fragment是否add过
     private final static List<Fragment> FRAGMENT_LIST = new ArrayList<>();
     private final static int[] tabNames = {R.string.title_home, R.string.title_channel, R.string.title_favorites};
 
@@ -36,15 +39,18 @@ public class MainActivity extends BaseActivity implements ChannelFragment.OnList
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     toolbar.setTitle(tabNames[0]);
+//                    toolbar.setTitle("主页");
                     showFragment(FRAGMENT_LIST.get(0));
                     return true;//为true则设置当前项为选中
                 case R.id.navigation_dashboard:
                     toolbar.setTitle(tabNames[1]);
+//                    toolbar.setTitle("频道");
                     showFragment(FRAGMENT_LIST.get(1));
 
                     return true;
                 case R.id.navigation_favorite:
                     toolbar.setTitle(tabNames[2]);
+//                    toolbar.setTitle("收藏");
                     showFragment(FRAGMENT_LIST.get(2));
 
                     return true;
@@ -61,12 +67,14 @@ public class MainActivity extends BaseActivity implements ChannelFragment.OnList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d(TAG, "onCreate");
 
         //显示首页
+        isExist = new Hashtable<>();
         initFragment();
         showFragment(FRAGMENT_LIST.get(0));
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar =(Toolbar) findViewById(R.id.toolbar);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -93,10 +101,10 @@ public class MainActivity extends BaseActivity implements ChannelFragment.OnList
     //add或切换Fragment
     private void showFragment(Fragment fragment){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (IS_EXIST.get(fragment.getClass().getName()) == null){
+        if (isExist.get(fragment.getClass().getName()) == null){
             transaction.add(R.id.content, fragment);
             selectFragment(transaction, fragment);
-            IS_EXIST.put(fragment.getClass().getName(), true);
+            isExist.put(fragment.getClass().getName(), true);
 
         }
         else {
@@ -111,5 +119,47 @@ public class MainActivity extends BaseActivity implements ChannelFragment.OnList
             transaction.hide(f);
         }
         transaction.show(fragment);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause");
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "onRestart");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy");
+
+
+
     }
 }

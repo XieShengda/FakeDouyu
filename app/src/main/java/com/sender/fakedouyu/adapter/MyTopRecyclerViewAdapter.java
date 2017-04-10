@@ -42,8 +42,9 @@ public class MyTopRecyclerViewAdapter extends RecyclerView.Adapter<MyTopRecycler
         holder.mItem = roomInfo;
         Glide.with(holder.mView.getContext()).load(roomInfo.getRoomSrc()).into(holder.roomImg);
         holder.mRoomName.setText(roomInfo.getRoomName());
+        holder.nickName.setText(roomInfo.getNickname());
         if (roomInfo.getOnline() != 0) {
-            holder.audienceNumber.setText("Online:" + roomInfo.getOnline());
+            holder.online.setText("观众人数：" + roomInfo.getOnline());
         }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +65,8 @@ public class MyTopRecyclerViewAdapter extends RecyclerView.Adapter<MyTopRecycler
         public final View mView;
         public final ImageView roomImg;
         public final TextView mRoomName;
-        public final TextView audienceNumber;
+        public final TextView online;
+        public final TextView nickName;
         public RoomInfo mItem;
 
         public ViewHolder(View view) {
@@ -72,7 +74,8 @@ public class MyTopRecyclerViewAdapter extends RecyclerView.Adapter<MyTopRecycler
             mView = view;
             roomImg = (ImageView) view.findViewById(R.id.room_img);
             mRoomName = (TextView) view.findViewById(R.id.room_name);
-            audienceNumber = (TextView) view.findViewById(R.id.audience_number);
+            nickName = (TextView) view.findViewById(R.id.nick_name);
+            online = (TextView) view.findViewById(R.id.online);
         }
 
     }

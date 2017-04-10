@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="144dp"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/colorIcons">
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="@color/colorPrimaryDark">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,15 +26,29 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="房间名字"
+                android:background="@color/colorIcons"
                 android:textColor="@color/colorPrimary_text"
                 android:textSize="@dimen/text_size_normal" />
 
             <TextView
-                android:id="@+id/audience_number"
+                android:id="@+id/nick_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="nickname"
+                android:background="@color/colorIcons"
+
+                android:textColor="@color/colorSecondary_text"
+                android:textSize="@dimen/text_size_tiny" />
+
+            <TextView
+                android:id="@+id/online"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="房间人数：9999"
+                android:background="@color/colorIcons"
+
                 android:textColor="@color/colorSecondary_text"
                 android:textSize="@dimen/text_size_tiny" />
     </LinearLayout>

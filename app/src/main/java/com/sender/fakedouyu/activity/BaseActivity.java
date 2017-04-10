@@ -14,5 +14,6 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
 
+
     }
 }
