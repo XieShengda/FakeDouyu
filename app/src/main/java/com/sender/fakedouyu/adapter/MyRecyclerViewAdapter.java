@@ -21,11 +21,11 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyTopRecyclerViewAdapter extends RecyclerView.Adapter<MyTopRecyclerViewAdapter.ViewHolder> {
+public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
     private final List<RoomInfo> mValues;
 
-    public MyTopRecyclerViewAdapter(List<RoomInfo> items) {
+    public MyRecyclerViewAdapter(List<RoomInfo> items) {
         mValues = items;
     }
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
     android:name="com.sender.fakedouyu.fragment.LiveRoomFragment"
@@ -8,6 +7,7 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
+    android:paddingLeft="28dp"
+    android:paddingRight="28dp"
     tools:context="com.sender.fakedouyu.fragment.LiveRoomFragment"
     tools:listitem="@layout/fragment_liveroom" />

@@ -13,7 +13,6 @@ import com.sender.fakedouyu.R;
 import com.sender.fakedouyu.fragment.ChannelFragment;
 import com.sender.fakedouyu.fragment.FavoriteFragment;
 import com.sender.fakedouyu.fragment.HomeFragment;
-import com.sender.fakedouyu.fragment.LiveRoomFragment;
 import com.sender.fakedouyu.fragment.dummy.DummyContent;
 
 import java.util.ArrayList;
@@ -21,13 +20,13 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends BaseActivity implements ChannelFragment.OnListFragmentInteractionListener, LiveRoomFragment.OnListFragmentInteractionListener, FavoriteFragment.OnListFragmentInteractionListener{
+public class MainActivity extends BaseActivity implements ChannelFragment.OnListFragmentInteractionListener, FavoriteFragment.OnListFragmentInteractionListener{
 
     private final static String TAG  = "MainActivity";
     private Toolbar toolbar;
 //    private CollapsingToolbarLayout toolbar;
     private Map<String, Boolean> isExist;//Fragment是否add过
-    private final static List<Fragment> FRAGMENT_LIST = new ArrayList<>();
+    private List<Fragment> fragmentList;
     private final static int[] tabNames = {R.string.title_home, R.string.title_channel, R.string.title_favorites};
 
     //选中状态监听器
@@ -40,18 +39,18 @@ public class MainActivity extends BaseActivity implements ChannelFragment.OnList
                 case R.id.navigation_home:
                     toolbar.setTitle(tabNames[0]);
 //                    toolbar.setTitle("主页");
-                    showFragment(FRAGMENT_LIST.get(0));
+                    showFragment(fragmentList.get(0));
                     return true;//为true则设置当前项为选中
                 case R.id.navigation_dashboard:
                     toolbar.setTitle(tabNames[1]);
 //                    toolbar.setTitle("频道");
-                    showFragment(FRAGMENT_LIST.get(1));
+                    showFragment(fragmentList.get(1));
 
                     return true;
                 case R.id.navigation_favorite:
                     toolbar.setTitle(tabNames[2]);
 //                    toolbar.setTitle("收藏");
-                    showFragment(FRAGMENT_LIST.get(2));
+                    showFragment(fragmentList.get(2));
 
                     return true;
 //                case R.id.navigation_notifications:
@@ -69,10 +68,11 @@ public class MainActivity extends BaseActivity implements ChannelFragment.OnList
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate");
 
-        //显示首页
         isExist = new Hashtable<>();
+        fragmentList = new ArrayList<>();
+        //显示首页
         initFragment();
-        showFragment(FRAGMENT_LIST.get(0));
+        showFragment(fragmentList.get(0));
 
         toolbar =(Toolbar) findViewById(R.id.toolbar);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -84,13 +84,14 @@ public class MainActivity extends BaseActivity implements ChannelFragment.OnList
     //初始化Fragment
     private void initFragment() {
 
+        // TODO: 2017/4/10 使用工厂方法
 //        LiveRoomFragment liveRoomFragment = new LiveRoomFragment();
         HomeFragment homeFragment = new HomeFragment();
-        FRAGMENT_LIST.add(homeFragment);
+        fragmentList.add(homeFragment);
         ChannelFragment channelFragment = new ChannelFragment();
-        FRAGMENT_LIST.add(channelFragment);
+        fragmentList.add(channelFragment);
         FavoriteFragment favoriteFragment = new FavoriteFragment();
-        FRAGMENT_LIST.add(favoriteFragment);
+        fragmentList.add(favoriteFragment);
     }
 
     @Override
@@ -115,12 +116,15 @@ public class MainActivity extends BaseActivity implements ChannelFragment.OnList
 
     //隐藏所有格Fragment，仅显示选中Fragment
     private void selectFragment(FragmentTransaction transaction, Fragment fragment) {
-        for (Fragment f : FRAGMENT_LIST){
+        for (Fragment f : fragmentList){
             transaction.hide(f);
         }
         transaction.show(fragment);
     }
 
+    /**
+     * 以下用于查看生命周期
+     */
     @Override
     protected void onStart() {
         super.onStart();
