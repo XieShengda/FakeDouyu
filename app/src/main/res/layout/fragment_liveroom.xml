@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="144dp"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorIcons">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/room_img"
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/temp" />
+
+
+
+            <TextView
+                android:id="@+id/room_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="房间名字"
+                android:textColor="@color/colorPrimary_text"
+                android:textSize="@dimen/text_size_normal" />
+
+            <TextView
+                android:id="@+id/audience_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="房间人数：9999"
+                android:textColor="@color/colorSecondary_text"
+                android:textSize="@dimen/text_size_tiny" />
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
