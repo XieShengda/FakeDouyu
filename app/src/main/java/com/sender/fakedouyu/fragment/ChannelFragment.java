@@ -13,8 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.LayoutAnimationController;
-import android.view.animation.ScaleAnimation;
 
 import com.sender.fakedouyu.R;
 import com.sender.fakedouyu.adapter.MyChannelRecyclerViewAdapter;
@@ -80,11 +78,11 @@ public class ChannelFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.addItemDecoration(new MyItemDecoration(16));
-            ScaleAnimation sa = new ScaleAnimation(0, 1, 0, 1);
-            sa.setDuration(2000);
-            LayoutAnimationController lac = new  LayoutAnimationController(sa, 0.5f);
-            lac.setOrder( LayoutAnimationController.ORDER_NORMAL);
-            recyclerView.setLayoutAnimation(lac);
+//            ScaleAnimation sa = new ScaleAnimation(0, 1, 0, 1);
+//            sa.setDuration(2000);
+//            LayoutAnimationController lac = new  LayoutAnimationController(sa, 0.5f);
+//            lac.setOrder( LayoutAnimationController.ORDER_REVERSE);
+//            recyclerView.setLayoutAnimation(lac);
 
             new NetworkRequestImpl(getContext()).getAllSubChannels(new RequestAllSubChannelsListener() {
                 @Override

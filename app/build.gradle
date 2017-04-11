@@ -38,4 +38,8 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta5'
     testCompile 'junit:junit:4.12'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    compile 'com.kyleduo.switchbutton:library:1.4.5'
+    compile 'com.github.ctiao:DanmakuFlameMaster:0.4.6'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }

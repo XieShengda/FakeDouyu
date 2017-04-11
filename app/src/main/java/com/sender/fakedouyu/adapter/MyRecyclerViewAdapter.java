@@ -1,17 +1,21 @@
 package com.sender.fakedouyu.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.sender.fakedouyu.R;
+import com.sender.fakedouyu.activity.PlayActivity;
 import com.sender.fakedouyu.bean.RoomInfo;
 import com.sender.fakedouyu.fragment.dummy.DummyContent.DummyItem;
+import com.sender.fakedouyu.listener.RequestStreamUrlListener;
+import com.sender.fakedouyu.model.NetworkRequestImpl;
 
 import java.util.List;
 
@@ -36,8 +40,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        RoomInfo roomInfo = mValues.get(position);
-        holder.mItem = roomInfo;
+        final RoomInfo roomInfo = mValues.get(position);
         Glide.with(holder.mView.getContext()).load(roomInfo.getRoomSrc()).into(holder.roomImg);
         holder.mRoomName.setText(roomInfo.getRoomName());
         holder.nickName.setText(roomInfo.getNickname());
@@ -48,8 +51,24 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2017/4/7 项目点击事件
-                Toast.makeText(holder.mView.getContext(), "点击了项目", Toast.LENGTH_SHORT).show();
+               // TODO: 2017/4/7 项目点击事件
+            new NetworkRequestImpl(holder.mView.getContext()).getStreamUrl(roomInfo.getRoomId(), new RequestStreamUrlListener(){
+                @Override
+                public void onSuccess(int roomId, String url) {
+                    Context context = holder.mView.getContext();
+                    Intent intent = new Intent(context, PlayActivity.class);
+                    intent.putExtra("URL", url).putExtra("ROOM_ID", roomId);
+                    context.startActivity(intent);
+
+
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+//                Toast.makeText(holder.mView.getContext(), "点击了项目", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -65,7 +84,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         public final TextView mRoomName;
         public final TextView online;
         public final TextView nickName;
-        public RoomInfo mItem;
 
         public ViewHolder(View view) {
             super(view);
