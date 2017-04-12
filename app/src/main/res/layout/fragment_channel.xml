@@ -8,12 +8,11 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/channel_icon"
-        android:layout_width="match_parent"
-        android:scaleType="centerCrop"
+        android:layout_width="56dp"
         android:layout_height="56dp" />
     <TextView
         android:id="@+id/tag_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary_text"

@@ -107,7 +107,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private class TopRequestChannelListener implements RequestSubChannelListener{
         @Override
         public void onSuccess(List<RoomInfo> roomInfos) {
-            topRecyclerView.setAdapter(new MyRecyclerViewAdapter(roomInfos));
+            topRecyclerView.setAdapter(new MyRecyclerViewAdapter(getContext(), roomInfos, BuildUrl.getDouyuLiveChannel()));
 
         }
 

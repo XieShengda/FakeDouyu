@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.sender.fakedouyu.R;
@@ -15,6 +16,7 @@ import com.sender.fakedouyu.activity.PlayActivity;
 import com.sender.fakedouyu.bean.RoomInfo;
 import com.sender.fakedouyu.fragment.dummy.DummyContent.DummyItem;
 import com.sender.fakedouyu.listener.RequestStreamUrlListener;
+import com.sender.fakedouyu.listener.RequestSubChannelListener;
 import com.sender.fakedouyu.model.NetworkRequestImpl;
 
 import java.util.List;
@@ -25,10 +27,17 @@ import java.util.List;
  */
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
-    private final List<RoomInfo> mValues;
+    private final List<RoomInfo> mRoomInfos;
+    private String mUrl;
+    private NetworkRequestImpl request;
+    private int offset = 1;
+    private Context mContext;
 
-    public MyRecyclerViewAdapter(List<RoomInfo> items) {
-        mValues = items;
+    public MyRecyclerViewAdapter(Context context, List<RoomInfo> items, String url) {
+        mRoomInfos = items;
+        mUrl = url;
+        mContext = context;
+        request = new NetworkRequestImpl(context);
     }
 
     @Override
@@ -40,19 +49,35 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        final RoomInfo roomInfo = mValues.get(position);
+        final RoomInfo roomInfo = mRoomInfos.get(position);
         Glide.with(holder.mView.getContext()).load(roomInfo.getRoomSrc()).into(holder.roomImg);
         holder.mRoomName.setText(roomInfo.getRoomName());
         holder.nickName.setText(roomInfo.getNickname());
-        if (roomInfo.getOnline() != 0) {
-            holder.online.setText("观众人数：" + roomInfo.getOnline());
+        holder.online.setText("观众人数：" + roomInfo.getOnline());
+
+        if (position == mRoomInfos.size() - 10){
+                String urlOffset = mUrl + "&offset=" + offset * 20;
+                offset++;
+                request.getSubChannel(urlOffset, new RequestSubChannelListener() {
+                    @Override
+                    public void onSuccess(List<RoomInfo> roomInfos) {
+                        mRoomInfos.addAll(roomInfos);
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError() {
+                        Toast.makeText(mContext,"无法获取数据", Toast.LENGTH_SHORT).show();
+                    }
+                });
         }
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                // TODO: 2017/4/7 项目点击事件
-            new NetworkRequestImpl(holder.mView.getContext()).getStreamUrl(roomInfo.getRoomId(), new RequestStreamUrlListener(){
+           request.getStreamUrl(roomInfo.getRoomId(), new RequestStreamUrlListener(){
                 @Override
                 public void onSuccess(int roomId, String url) {
                     Context context = holder.mView.getContext();
@@ -65,6 +90,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
                 @Override
                 public void onError() {
+                    Toast.makeText(mContext,"无法获取数据", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -75,7 +101,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return mRoomInfos.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -94,5 +120,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             online = (TextView) view.findViewById(R.id.online);
         }
 
+    }
+
+    public void resetOffset(){
+        offset = 1;
     }
 }
