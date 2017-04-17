@@ -10,7 +10,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.sender.fakedouyu.R;
 import com.sender.fakedouyu.fragment.ChannelFragment;
@@ -21,11 +29,14 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends BaseActivity{
 
     private final static String TAG  = "MainActivity";
     private Toolbar toolbar;
+    private ImageView welImg;
 //    private CollapsingToolbarLayout toolbar;
     private Map<String, Boolean> isExist;//Fragment是否add过
     private List<Fragment> fragmentList;
@@ -102,7 +113,64 @@ public class MainActivity extends BaseActivity{
             }
         });
 
+        welImg = (ImageView) findViewById(R.id.wel_img);
+        final FrameLayout welBg = (FrameLayout) findViewById(R.id.bg_wel);
+        hideWel(welBg);
+    }
 
+    //  隐藏欢迎界面
+    private void hideWel(final FrameLayout frameLayout) {
+        AnimationSet outSet = getOutSet();
+        outSet.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                frameLayout.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.content_out));
+                frameLayout.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        welImg.startAnimation(outSet);
+    }
+
+    //  获取欢迎页面动画
+    private AnimationSet getOutSet() {
+       AnimationSet outSet = new AnimationSet(true);
+
+        TranslateAnimation animOut3 =
+                new TranslateAnimation(
+                        Animation.RELATIVE_TO_PARENT,-1.0f,
+                        Animation.RELATIVE_TO_PARENT,1.0f,
+                        Animation.RELATIVE_TO_PARENT,0f,
+                        Animation.RELATIVE_TO_PARENT,0f);
+
+
+//        RotateAnimation animOut1 = new RotateAnimation(
+//                0.0f, 360.0f,
+//                Animation.RELATIVE_TO_SELF, 0.5f,
+//                Animation.RELATIVE_TO_SELF, 0.5f);
+//
+//        ScaleAnimation animOut2 = new ScaleAnimation(
+//                1.0f, 0.0f, 1.0f, 0.0f,
+//                Animation.RELATIVE_TO_SELF, 0.5f,
+//                Animation.RELATIVE_TO_SELF, 0.5f);
+
+//        outSet.addAnimation(animOut1);
+//        outSet.addAnimation(animOut2);
+        outSet.addAnimation(animOut3);
+        outSet.setDuration(2000);
+//        outSet.setStartOffset(500);
+        outSet.setFillAfter(true);
+        return outSet;
     }
 
     //初始化Fragment
@@ -185,5 +253,31 @@ public class MainActivity extends BaseActivity{
 
 
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            dblClickExit();
+        }
+        return false;
+    }
+
+    private boolean isExit;
+    private void dblClickExit() {
+        if (!isExit) {
+            isExit = true;
+            Snackbar.make(toolbar, "再按一次退出", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+            Timer tExit = new Timer();
+            tExit.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    isExit = false;
+                }
+            }, 2000);
+        } else {
+            finish();
+            System.exit(0);
+        }
     }
 }
