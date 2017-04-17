@@ -27,6 +27,7 @@ import java.util.List;
  */
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
+    private final static String TAG = "MyRecyclerViewAdapter";
     private final List<RoomInfo> mRoomInfos;
     private String mUrl;
     private NetworkRequestImpl request;
@@ -56,7 +57,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.online.setText("观众人数：" + roomInfo.getOnline());
 
         if (position == mRoomInfos.size() - 10){
-                String urlOffset = mUrl + "&offset=" + offset * 20;
+                String urlOffset = mUrl + "&offset=" + offset * 20;//offset是开始位置
+//            Log.d(TAG, "onBindViewHolder: " + urlOffset);
                 offset++;
                 request.getSubChannel(urlOffset, new RequestSubChannelListener() {
                     @Override

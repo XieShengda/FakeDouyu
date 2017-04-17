@@ -1,10 +1,13 @@
 package com.sender.fakedouyu.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -13,14 +16,13 @@ import com.sender.fakedouyu.R;
 import com.sender.fakedouyu.fragment.ChannelFragment;
 import com.sender.fakedouyu.fragment.FavoriteFragment;
 import com.sender.fakedouyu.fragment.HomeFragment;
-import com.sender.fakedouyu.fragment.dummy.DummyContent;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends BaseActivity implements FavoriteFragment.OnListFragmentInteractionListener{
+public class MainActivity extends BaseActivity{
 
     private final static String TAG  = "MainActivity";
     private Toolbar toolbar;
@@ -78,6 +80,28 @@ public class MainActivity extends BaseActivity implements FavoriteFragment.OnLis
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        final SearchView searchView = (SearchView) findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (query == null){
+                    Snackbar.make(searchView, "没有输入数据，再试试吧", Snackbar.LENGTH_LONG).setAction("Action", null ).show();
+                    return false;
+                }else{
+                    Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                    intent.putExtra("KEY_WORD", query);
+                    startActivity(intent);
+                    return true;
+                }
+
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
 
     }
 
@@ -94,10 +118,6 @@ public class MainActivity extends BaseActivity implements FavoriteFragment.OnLis
         fragmentList.add(favoriteFragment);
     }
 
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
 
     //add或切换Fragment
     private void showFragment(Fragment fragment){

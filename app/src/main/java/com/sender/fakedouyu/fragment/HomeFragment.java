@@ -149,12 +149,13 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if (isFirstTouch){
-            topContainerHeight = topRecyclerContainer.getHeight();
+//            topContainerHeight = topRecyclerContainer.getHeight();
             viewPagerHeight = viewPager.getHeight();
             isFirstTouch = false;
         }
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                topContainerHeight = topRecyclerContainer.getHeight();
                 mFirstX = event.getX();
                 mFirstY = event.getY();
                 break;
