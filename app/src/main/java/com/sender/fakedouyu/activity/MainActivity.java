@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
@@ -168,6 +169,7 @@ public class MainActivity extends BaseActivity{
 //        outSet.addAnimation(animOut2);
         outSet.addAnimation(animOut3);
         outSet.setDuration(2000);
+        outSet.setInterpolator(new AccelerateInterpolator());
 //        outSet.setStartOffset(500);
         outSet.setFillAfter(true);
         return outSet;
