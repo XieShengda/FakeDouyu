@@ -1,39 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.sender.fakedouyu.activity.MainActivity">
-
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    android:layout_height="match_parent">
+    <LinearLayout
+    android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="?attr/colorPrimaryDark"
-        android:theme="?attr/actionBarTheme"
-        android:padding="8dp"
-        app:logo="@mipmap/ic_launcher_round"
-        app:title="@string/title_home"
-        app:titleTextAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.sender.fakedouyu.activity.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
 
-    </FrameLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normal_height"
+            android:background="?attr/colorPrimaryDark"
+            android:theme="?attr/actionBarTheme"
+            android:padding="8dp"
+            app:logo="@mipmap/ic_launcher_round"
+            app:title="@string/title_home"
+            app:titleTextAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            >
+            <android.support.v7.widget.SearchView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/search_view"
+                android:layout_gravity="right"
+                android:imeOptions="actionSearch"
+                app:queryHint="请输入房间信息..."
+                />
+        </android.support.v7.widget.Toolbar>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/navigation" />
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-</LinearLayout>
+        </FrameLayout>
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normal_height"
+            android:layout_gravity="bottom"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/navigation" />
+
+    </LinearLayout>
+
+    <include layout="@layout/wel_page" />
+
+</FrameLayout>

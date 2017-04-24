@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="com.sender.fakedouyu.fragment.FavoriteFragment"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
-    tools:context="com.sender.fakedouyu.fragment.FavoriteFragment"
-    tools:listitem="@layout/fragment_favorite" />
+    android:id="@+id/favorite_refresh_layout">
+
+    <com.sender.fakedouyu.custom_view.MyRecyclerView
+        android:id="@+id/favorite_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+ />
+</android.support.v4.widget.SwipeRefreshLayout>

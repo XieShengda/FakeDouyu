@@ -10,20 +10,21 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.raizlabs.android.dbflow.sql.language.Select;
 import com.sender.fakedouyu.bean.GsonAllChannels;
 import com.sender.fakedouyu.bean.GsonDouyuRoom;
 import com.sender.fakedouyu.bean.GsonDouyuRoomInfo;
 import com.sender.fakedouyu.bean.GsonSubChannel;
 import com.sender.fakedouyu.bean.RoomInfo;
 import com.sender.fakedouyu.bean.SubChannelInfo;
-import com.sender.fakedouyu.db.RoomIdDatabaseHelper;
+import com.sender.fakedouyu.db.Room;
 import com.sender.fakedouyu.listener.NetworkRequest;
 import com.sender.fakedouyu.listener.RequestAllSubChannelsListener;
 import com.sender.fakedouyu.listener.RequestHeartRoomsListener;
 import com.sender.fakedouyu.listener.RequestStreamUrlListener;
 import com.sender.fakedouyu.listener.RequestSubChannelListener;
 import com.sender.fakedouyu.utils.BuildUrl;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +38,10 @@ public class NetworkRequestImpl implements NetworkRequest {
     private static final String TAG = "NetworkRequestImpl";
     private Context mContext;
     private RequestQueue mRequestQueue;
-    private RoomIdDatabaseHelper mRoomIdDB;
 
     public NetworkRequestImpl(Context context) {
         this.mContext = context;
         mRequestQueue = Volley.newRequestQueue(context);
-        mRoomIdDB = new RoomIdDatabaseHelper(context, RoomIdDatabaseHelper.HEART_DB_NAME, null, 1);
     }
 
     /**
@@ -209,7 +208,8 @@ public class NetworkRequestImpl implements NetworkRequest {
     @Override
     public void getHeartRooms(final RequestHeartRoomsListener listener) {
         mRequestQueue.cancelAll(null);
-        List<Integer> roomIds = mRoomIdDB.getRoomIds();
+
+        List<Integer> roomIds = getRoomId();
         for (int roomId : roomIds) {
             String url = BuildUrl.getDouyuRoom(roomId);
             StringRequest request = new StringRequest(url,
@@ -229,6 +229,15 @@ public class NetworkRequestImpl implements NetworkRequest {
             });
             mRequestQueue.add(request);
         }
+    }
+
+    private List<Integer> getRoomId() {
+        List<Integer> roomIds = new ArrayList<>();
+        for (Room room : new Select().from(Room.class).queryList()){
+            roomIds.add(room.roomId);
+            Log.d(TAG, "getRoomId: " + room.roomId);
+        }
+        return roomIds;
     }
 
     private RoomInfo handlerHeartRoomsResponse(String response){

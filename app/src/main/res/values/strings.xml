@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">我是假斗鱼</string>
+    <string name="app_name">FakeFish</string>
     <string name="title_home">主页</string>
     <string name="title_channel">频道</string>
     <string name="title_favorites">收藏</string>
@@ -7,4 +7,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="top">人气推荐</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="action_settings">Settings</string>
 </resources>

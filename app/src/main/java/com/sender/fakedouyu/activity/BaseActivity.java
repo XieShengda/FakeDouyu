@@ -15,5 +15,6 @@ public class BaseActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
 
+
     }
 }

@@ -7,4 +7,7 @@
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="text_size_normal">14sp</dimen>
     <dimen name="text_size_tiny">12sp</dimen>
+    <dimen name="normal_height">48dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

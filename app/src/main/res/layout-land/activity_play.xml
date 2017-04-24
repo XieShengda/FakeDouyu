@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sender.fakedouyu.activity.PlayActivity">
+    <!--视频框架-->
+    <io.vov.vitamio.widget.VideoView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/vitamio_video"/>
+
+    <!--弹幕框架-->
+    <master.flame.danmaku.ui.widget.DanmakuView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/danmaku_view"/>
+    <!--ControlView-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_height"
+        android:id="@+id/control_view"
+        android:layout_gravity="top"
+        android:visibility="gone"
+        android:background="@color/colorTranslucent_black">
+
+        <ImageView
+            android:layout_width="@dimen/normal_height"
+            android:layout_height="@dimen/normal_height"
+            android:padding="4dp"
+            android:id="@+id/back_button" 
+            app:srcCompat="@drawable/ic_arrow_back_black_24dp"
+            android:onClick="onBack"
+            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:id="@+id/nick_name"-->
+            <!--android:textSize="@dimen/text_size_large"-->
+            <!--android:textColor="@color/colorTranslucent_white"-->
+            <!--android:text="nick_name"-->
+            <!--android:layout_toRightOf="@id/back_button"-->
+            <!--android:layout_centerVertical="true"/>-->
+        <ImageView
+            android:layout_width="@dimen/normal_height"
+            android:layout_height="@dimen/normal_height"
+            android:id="@+id/favorite_flag"
+            android:padding="8dp"
+            android:layout_marginRight="8dp"
+            app:srcCompat="@drawable/ic_favorite_border_black_24dp"
+            android:layout_alignParentRight="true"/>
+        <com.kyleduo.switchbutton.SwitchButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/barrage_switch"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:layout_toLeftOf="@id/favorite_flag"
+            android:checked="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/colorTranslucent_white"
+            android:text="弹幕"
+            android:layout_toLeftOf="@id/barrage_switch"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:layout_width="@dimen/normal_height"
+            android:layout_height="@dimen/normal_height"
+            android:src="@mipmap/ic_launcher_round"
+            android:padding="4dp"
+            android:layout_centerInParent="true"/>
+
+
+    </RelativeLayout>
+
+</FrameLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:id="@+id/swipe_refresh"
+    tools:context="com.sender.fakedouyu.activity.ScrollingActivity"
+    tools:showIn="@layout/activity_scrolling">
+
+    <com.sender.fakedouyu.custom_view.MyRecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingRight="32dp"
+        android:paddingLeft="32dp"
+        android:id="@+id/room_in_channel"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+/>
+</android.support.v4.widget.SwipeRefreshLayout>
