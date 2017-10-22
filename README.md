@@ -1,6 +1,10 @@
-以下为应用截图，具体可以安装Files文件夹中的FakeFish_1.0.apk查看
-==============================================================
+- 多媒体框架：Vitamio
+- 弹幕框架：danmaku
+- http：voley
+- database：dbflow
 
+以下为应用截图，具体可以安装Files文件夹中的FakeFish_1.0.apk查看
+============================================================
 <img src="https://github.com/XieShengda/FakeDouyu/blob/master/Files/1.png" width="300" height="530">
 <img src="https://github.com/XieShengda/FakeDouyu/blob/master/Files/2.png" width="300" height="530">
 <img src="https://github.com/XieShengda/FakeDouyu/blob/master/Files/3.png" width="300" height="530">
